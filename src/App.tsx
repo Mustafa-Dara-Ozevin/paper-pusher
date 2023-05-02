@@ -15,12 +15,9 @@ import { register } from "@tauri-apps/api/globalShortcut";
 import { writeText } from "@tauri-apps/api/clipboard";
 import { enable } from "tauri-plugin-autostart-api";
 
-
-
 register("Alt+L", async () => {
   await invoke("show_window");
 });
-
 
 const items: MenuProps["items"] = [
   {
@@ -78,27 +75,36 @@ const items: MenuProps["items"] = [
   },
 ];
 
-const getName = () =>{
-  if (localStorage.getItem("officerName") === null || localStorage.getItem("officerName") === "") {
+const getName = () => {
+  if (
+    localStorage.getItem("officerName") === null ||
+    localStorage.getItem("officerName") === ""
+  ) {
     const name: any = prompt("Enter your badge number and name");
     localStorage.setItem("officerName", name);
   }
-}
+};
 
 const App: React.FC = () => {
-
-  async () =>{
+  async () => {
     await enable();
-  }
+  };
   getName();
 
   const onClick: MenuProps["onClick"] = async (e) => {
     getName();
-    let suspect: any = prompt("Enter suspect name: ")
+    let suspect: any = prompt("Enter suspect name: ");
+    let name: any = localStorage.getItem("officerName");
+    if (name === null || name === "" || suspect === null || suspect === "") {
+      return;
+    }
     await invoke("hide_window");
     let text: string = await invoke("template", { key: e.key });
-    let name: any = localStorage.getItem("officerName")
-    text = name + "'s Statement: \n" + text.replaceAll("OFFICER",name).replaceAll("SUSPECT",suspect);
+
+    text =
+      name +
+      "'s Statement: \n" +
+      text.replaceAll("OFFICER", name).replaceAll("SUSPECT", suspect);
 
     await writeText(text);
   };
