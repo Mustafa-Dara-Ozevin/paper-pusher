@@ -8,7 +8,7 @@ pub const CONTROL_DEVICES: &str =
 "OFFICER saw CAR going through red light(s) and attempted to pull it over. SUSPECT complied and identified themselves. They were give a ticket for Failure to obey traffic control devices.";
 
 pub const NEGLIGENT_DRIVING: &str = 
-"OFFICER saw CAR going through red light(s) and going OVERSPEEDLIMIT at a SPEEDLIMIT. Officer attempted to pull the CAR over, SUSPECT complied and identified themselves. They were give a ticket for Negligent Driving.";
+"OFFICER saw CAR going through red light(s) and going OVERSPEEDLIMIT at a SPEEDLIMIT. OFFICER attempted to pull the CAR over, SUSPECT complied and identified themselves. They were give a ticket for Negligent Driving.";
 
 pub const GRS: &str = 
 "OFFICER responded to shots fired dispatch call at LOCATION. Upon arriving at the location OFFICER found several injured people at the ground. After making sure scene is safe,
@@ -42,4 +42,4 @@ pub const SPEEDING_TICKET: &str =
 "OFFICER clocked CAR going OVERSPEEDLIMIT on a SPEEDLIMIT. SUSPECT complied after being told to pull over and identified themselves. SUSPECT was issued a third/second/first degree speeding ticket.";
 
 pub const SUSPENDED_LICENSE: &str = 
-"OFFCER pulled over CAR in LOCATION for REASON. SUSPECT complied and identified themselves however their license was suspended. SUSPECT was arrested for operating a vehicle with a suspended license and their car was impounded.";
+"OFFICER pulled over CAR in LOCATION for REASON. SUSPECT complied and identified themselves however their license was suspended. SUSPECT was arrested for operating a vehicle with a suspended license and their car was impounded.";
