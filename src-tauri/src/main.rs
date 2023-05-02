@@ -11,7 +11,10 @@ fn make_tray() -> SystemTray {
     let menu = SystemTrayMenu::new()
         .add_item(CustomMenuItem::new("toggle".to_string(), "Hide"))
         .add_item(CustomMenuItem::new("quit".to_string(), "Quit"))
-        .add_item(CustomMenuItem::new("changeName".to_owned(), "Change Officer Name"));
+        .add_item(CustomMenuItem::new(
+            "changeName".to_owned(),
+            "Change Officer Name",
+        ));
     return SystemTray::new().with_menu(menu);
 }
 
@@ -33,7 +36,8 @@ fn handle_tray_event(app: &AppHandle, event: SystemTrayEvent) {
                 window.set_always_on_top(true).unwrap();
                 menu_item.set_title("Hide").unwrap();
             }
-        }if id.as_str() == "changeName"{
+        }
+        if id.as_str() == "changeName" {
             let window = app.get_window("main").unwrap();
             let menu_item = app.tray_handle().get_item("toggle");
             if !window.is_visible().unwrap() {
