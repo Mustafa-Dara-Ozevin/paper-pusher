@@ -10,8 +10,11 @@ https://user-images.githubusercontent.com/63582793/235379716-4e8a3208-7d6a-4e04-
 # TODO 
 
 > Improve templates
+
 > Add more templates
+
 > Add the option to write your own templates
+
 
 # CROSS-PLATFORM SUPPORT
 
