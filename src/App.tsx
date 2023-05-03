@@ -15,8 +15,6 @@ import { register } from "@tauri-apps/api/globalShortcut";
 import { writeText } from "@tauri-apps/api/clipboard";
 import { enable } from "tauri-plugin-autostart-api";
 
-
-
 register("Alt+L", async () => {
   await invoke("show_window");
 });
@@ -77,16 +75,37 @@ const items: MenuProps["items"] = [
   },
 ];
 
-const App: React.FC = () => {
-  const [current, setCurrent] = useState("mail");
-
-  async () =>{
-    await enable();
+const getName = () => {
+  if (
+    localStorage.getItem("officerName") === null ||
+    localStorage.getItem("officerName") === ""
+  ) {
+    const name: any = prompt("Enter your badge number and name");
+    localStorage.setItem("officerName", name);
   }
+};
+
+const App: React.FC = () => {
+  async () => {
+    await enable();
+  };
+  getName();
 
   const onClick: MenuProps["onClick"] = async (e) => {
+    getName();
+    let suspect: any = prompt("Enter suspect name: ");
+    let name: any = localStorage.getItem("officerName");
+    if (name === null || name === "" || suspect === null || suspect === "") {
+      return;
+    }
     await invoke("hide_window");
     let text: string = await invoke("template", { key: e.key });
+
+    text =
+      name +
+      "'s Statement: \n" +
+      text.replaceAll("OFFICER", name).replaceAll("SUSPECT", suspect);
+
     await writeText(text);
   };
 
@@ -94,7 +113,6 @@ const App: React.FC = () => {
     <Menu
       id="menu"
       onClick={onClick}
-      selectedKeys={[current]}
       mode="vertical"
       theme="dark"
       items={items}
